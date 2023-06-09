@@ -16,7 +16,7 @@ class NewWindow(QDialog):
         super().__init__()
 
         self.setWindowTitle("Picture")
-        self.setGeometry(660, 240, 600, 600)
+        self.setGeometry(660, 240, 1200, 600)
 
         self.figure = Figure()
 
@@ -126,7 +126,7 @@ class MyWindow(QMainWindow):
         subLayout_1.addWidget(lbl_N_Datas)
 
         self.txt_N_Datas = QLineEdit()
-        self.txt_N_Datas.setFixedWidth(50)
+        self.txt_N_Datas.setFixedWidth(70)
         self.txt_N_Datas.setFixedHeight(40)
         self.txt_N_Datas.setMaxLength(3)
         self.txt_N_Datas.setFont(QFont('Consolas', 16))
@@ -136,7 +136,7 @@ class MyWindow(QMainWindow):
         btn_submit.setText("SUBMIT")
         btn_submit.setFont(QFont('Consolas', 20))
         btn_submit.setFixedHeight(40)
-        btn_submit.setFixedWidth(100)
+        btn_submit.setFixedWidth(140)
         subLayout_1.addWidget(btn_submit)
 
         # button clicked
@@ -168,12 +168,16 @@ class MyWindow(QMainWindow):
             mes.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
             result = mes.exec_()
             if result == QMessageBox.Yes:
-                pass
+                self.hide()
+                newWindow = NewWindow(100)
+                newWindow.exec_()
+                self.show()
             else:
                 self.__cnt += 1
                 if self.__cnt != 3:
                     QMessageBox.warning(self, "Warning",
                                         "Please re-input the N, and 0 < N <= 100!")
+                    self.txt_N_Datas.clear()
                 else:
                     QMessageBox.warning(self, "Fuck-you", "FUCK-YOU")
                     exit()
